@@ -1,0 +1,951 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"param",
+				"param_db"
+			],
+			[
+				"R",
+				"RAD_TO_DEG"
+			],
+			[
+				"le",
+				"legends_"
+			],
+			[
+				"blank",
+				"blankIt_"
+			],
+			[
+				"cri",
+				"criteria"
+			],
+			[
+				"max_",
+				"max_longitude_"
+			],
+			[
+				"south",
+				"southPoleLon_"
+			],
+			[
+				"colour",
+				"colourComponent_"
+			],
+			[
+				"xyzT",
+				"xyzToHcl"
+			],
+			[
+				"meth",
+				"method"
+			],
+			[
+				"metho",
+				"method_"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "",
+			"file": "x",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "axis/logarithmic.py",
+			"settings":
+			{
+				"buffer_size": 2214,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "!/bin/bash\n\n\nmodule unload Magics\nmodule load Magics/new\n\nfor i in * \n\nSTART=$(date +%s)\npython regression.py $1 $2 prod\nEND=$(date +%s)\nREF=$(echo \"$END - $START\" | bc)\n\n\nmodule swap Magics/Milana\nSTART=$(date +%s)\npython regression.py $1 $2 test\nEND=$(date +%s)\nNEW=$(echo \"$END - $START\" | bc)\npython compare.py $1 exp\n\npwd=`pwd`\necho \"$REF seconds ---> $NEW seconds ...\"\necho \"$pwd/$1.html created\"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"settings":
+			{
+				"buffer_size": 423,
+				"line_ending": "Unix",
+				"name": "!/bin/bash"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 359.0,
+		"last_filter": "clan",
+		"selected_items":
+		[
+			[
+				"clan",
+				"Clang Format: Select Style"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"intall",
+				"Install Package Control"
+			],
+			[
+				"buil",
+				"Build With: ecbuild"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 390.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": true,
+		"show_open_files": true,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": true
+	},
+	"expanded_folders":
+	[
+		"/var/tmp/cgs/git/magics-regression"
+	],
+	"file_history":
+	[
+		"/home/graphics/cgs/.config/sublime-text-3/Packages/Clang Format/clang_format_custom.sublime-settings",
+		"/tmp/cgs/git/magics-develop/src/eckit_readers/MvPrepBufrPrep.h",
+		"/tmp/cgs/git/magics-develop/tools/Find Results",
+		"/tmp/cgs/git/magics-develop/src/decoders/NetcdfData.h",
+		"/tmp/cgs/git/magics-develop/src/params/AdvancedColourTechnique.xml",
+		"/tmp/cgs/git/magics-develop/src/LibMagics.h",
+		"/tmp/cgs/git/magics-develop/tools/header.template",
+		"/tmp/cgs/git/magics-develop/tools/source.template",
+		"/tmp/cgs/git/magics-develop/tools/xml2cc.py",
+		"/tmp/cgs/git/magics-develop/src/common/Matrix.h",
+		"/tmp/cgs/git/magics-develop/src/common/MatrixHandler.h",
+		"/tmp/cgs/git/magics-develop/CMakeLists.txt",
+		"/tmp/cgs/git/magics/tools/xml2cc_new.pl",
+		"/tmp/cgs/git/magics/src/decoders/PointIndex.cc",
+		"/tmp/cgs/git/magics/src/decoders/PointIndex.h",
+		"/tmp/cgs/git/magics/share/magics/bufr_98.xml",
+		"/tmp/cgs/git/magics/src/visualisers/ObsItemFamily.cc",
+		"/tmp/cgs/git/magics/src/decoders/GribRegularInterpretor.cc",
+		"/tmp/cgs/git/magics/src/decoders/GribDecoder.cc",
+		"/tmp/cgs/git/magics/src/decoders/GribInterpretor.h",
+		"/tmp/cgs/git/magics/src/common/GribInterpretor.h",
+		"/tmp/cgs/git/magics/src/decoders/GribDecoder.h",
+		"/home/graphics/cgs/.config/sublime-text-3/Packages/User/ecbuild.sublime-build",
+		"/tmp/cgs/git/magics/src/decoders/GribRegularInterpretor.h",
+		"/tmp/cgs/git/magics/src/params/SimplePolyline.xml",
+		"/tmp/cgs/git/magics/src/common/Matrix.cc",
+		"/tmp/cgs/git/magics/src/eckit/KPoint.h",
+		"/tmp/cgs/git/magics/CMakeLists.txt",
+		"/tmp/cgs/git/magics/src/basic/LegendVisitor.cc",
+		"/tmp/cgs/git/magics/src/params/SymbolPlotting.xml",
+		"/tmp/cgs/git/magics/share/magics/table_128.xml",
+		"/tmp/cgs/git/magics/share/magics/table_260.xml",
+		"/tmp/cgs/git/magics/share/magics/table_160.xml",
+		"/tmp/cgs/git/magics/src/visualisers/ObsItem.h",
+		"/tmp/cgs/git/magics/src/visualisers/ObsItemFamily.h",
+		"/tmp/cgs/git/magics/src/params/ObsPlotting.xml",
+		"/tmp/cgs/git/magics/src/common/MagExceptions.cc",
+		"/tmp/cgs/git/magics/src/common/MagExceptions.h",
+		"/tmp/cgs/git/magics/src/CMakeLists.txt",
+		"/tmp/cgs/git/magics/src/eckit/CMakeLists.txt",
+		"/tmp/cgs/git/magics/src/visualisers/Axis.cc",
+		"/tmp/cgs/git/magics/src/common/Symbol.cc",
+		"/tmp/cgs/git/magics/src/visualisers/SymbolMode.h",
+		"/tmp/cgs/git/magics/src/common/Layout.cc",
+		"/tmp/cgs/git/magics/src/params/HistogramLegendMethod.xml",
+		"/tmp/cgs/git/magics/src/common/MagException.cc",
+		"/tmp/cgs/git/magics/src/common/MagException.h",
+		"/tmp/cgs/git/magics/src/decoders/LocalTable.cc",
+		"/tmp/cgs/git/magics/src/decoders/LocalTable.h",
+		"/tmp/cgs/git/magics/src/visualisers/DefinitionTable.h",
+		"/tmp/cgs/git/magics/src/visualisers/DefinitionTable.hcc",
+		"/tmp/cgs/git/magics/regression/gallery/contour12.py",
+		"/home/graphics/cgs/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/tmp/cgs/git/magics/src/params/Boundaries.xml",
+		"/home/graphics/cgs/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/tmp/cgs/git/magics/src/eckit/KDTree.h",
+		"/tmp/cgs/git/magics/src/eckit/Point2.h",
+		"/tmp/cgs/git/magics/src/boost/geometry/algorithms/detail/point_on_border.hpp",
+		"/tmp/cgs/git/magics/src/basic/LegendVisitor.h",
+		"/tmp/cgs/git/magics/src/params/LegendVisitor.xml",
+		"/tmp/cgs/git/magics/src/visualisers/LegendMethod.cc",
+		"/tmp/cgs/git/magics/src/visualisers/IsoPlot.cc",
+		"/tmp/cgs/git/magics/src/eckit/SPNode.cc",
+		"/tmp/cgs/git/magics/src/eckit/KDNode.h",
+		"/tmp/cgs/git/magics/src/eckit/KDMapped.h",
+		"/tmp/cgs/git/magics/src/eckit/StatCollector.h",
+		"/tmp/cgs/git/magics/src/eckit/KDMemory.h",
+		"/tmp/cgs/git/magics/src/eckit/KDNode.cc",
+		"/tmp/cgs/git/magics/src/eckit/SPNode.h",
+		"/tmp/cgs/git/magics/src/eckit/SPTree.h",
+		"/tmp/cgs/git/magics/src/eckit/SPNodeQueue.h",
+		"/tmp/cgs/git/magics/src/eckit/Value.h",
+		"/tmp/cgs/git/develop/magics/src/visualisers/EpsGraph.cc"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/var/tmp/cgs/git/magics-regression"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "x",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "axis/logarithmic.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2078,
+								2078
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1140.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								69,
+								69
+							]
+						],
+						"settings":
+						{
+							"auto_name": "!/bin/bash",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Build",
+	"project": "",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"axis/logarithmic.py"
+			],
+			[
+				"ve",
+				"VERSION.cmake"
+			],
+			[
+				"magics_w",
+				"src/common/magics_windef.h"
+			],
+			[
+				"plucma",
+				"regression/plumes/CMakeLists.txt"
+			],
+			[
+				"version",
+				"VERSION.cmake"
+			],
+			[
+				"graph/",
+				"regression/graph/CMakeLists.txt"
+			],
+			[
+				"recma",
+				"regression/CMakeLists.txt"
+			],
+			[
+				"galcma",
+				"regression/gallery/CMakeLists.txt"
+			],
+			[
+				"co",
+				"~/era5land/commons.py"
+			],
+			[
+				"proj4pr",
+				"src/common/Proj4Projection.cc"
+			],
+			[
+				"projection",
+				"~/projection2.py"
+			],
+			[
+				"epsg",
+				"share/magics/epsg.json"
+			],
+			[
+				"coun",
+				"src/visualisers/CountSelectionType.cc"
+			],
+			[
+				"interval",
+				"src/visualisers/IntervalSelectionType.cc"
+			],
+			[
+				"cmake",
+				"CMakeLists.txt"
+			],
+			[
+				"legendvis",
+				"src/basic/LegendVisitor.cc"
+			],
+			[
+				".clam",
+				".clang-format"
+			],
+			[
+				"ne",
+				"src/decoders/NetcdfDecoder.h"
+			],
+			[
+				"netcdfd",
+				"src/decoders/NetcdfDecoder.h"
+			],
+			[
+				"netcdfge",
+				"src/decoders/NetcdfGeopointsInterpretor.cc"
+			],
+			[
+				"magcl",
+				"src/common/MagClipper.cc"
+			],
+			[
+				"ver",
+				"VERSION.cmake"
+			],
+			[
+				"contour",
+				"test/contour.c"
+			],
+			[
+				"test/cmake",
+				"test/CMakeLists.txt"
+			],
+			[
+				"tescm",
+				"test/CMakeLists.txt"
+			],
+			[
+				"proj4",
+				"src/common/Proj4Projection.h"
+			],
+			[
+				"mag",
+				"src/common/MagClipper.cc"
+			],
+			[
+				"eps",
+				"share/magics/epsg.json"
+			],
+			[
+				"params/cma",
+				"src/params/CMakeLists.txt"
+			],
+			[
+				"32661",
+				"src/params/Proj4EPSG32661.xml"
+			],
+			[
+				"gribde",
+				"src/decoders/GribDecoder.cc"
+			],
+			[
+				"era",
+				"~/era5land/era5land.py"
+			],
+			[
+				"magcli",
+				"src/common/MagClipper.cc"
+			],
+			[
+				"magexc",
+				"src/common/MagExceptions.cc"
+			],
+			[
+				"magex",
+				"src/common/MagException.cc"
+			],
+			[
+				"fortra",
+				"src/params/FortranRootSceneNode.xml"
+			],
+			[
+				"symbol.cc",
+				"src/common/Symbol.cc"
+			],
+			[
+				"pol",
+				"src/common/Polyline.h"
+			],
+			[
+				"prob",
+				"share/magics/styles/ecmwf/probabilities.json"
+			],
+			[
+				"scene",
+				"src/basic/SceneVisitor.cc"
+			],
+			[
+				"magics",
+				"python/Magics.py.in"
+			],
+			[
+				"macro",
+				"python/Magics/macro.py"
+			],
+			[
+				"legendv",
+				"src/params/LegendVisitor.xml"
+			],
+			[
+				"iso",
+				"src/params/IsoPlot.xml"
+			],
+			[
+				"isoplot.cc",
+				"src/visualisers/IsoPlot.cc"
+			],
+			[
+				"ecmwf",
+				"share/magics/styles/ecmwf/2t.json"
+			],
+			[
+				"ecmwf/s",
+				"share/magics/styles/ecmwf/styles.json"
+			],
+			[
+				"contourli",
+				"src/visualisers/ContourLibrary.cc"
+			],
+			[
+				"units",
+				"share/magics/units-rules.json"
+			],
+			[
+				"tp_",
+				"share/magics/styles/ecmwf/tp_rate.json"
+			],
+			[
+				"colourtec",
+				"src/visualisers/ColourTechnique.cc"
+			],
+			[
+				"colour",
+				"src/common/ColourTable.cc"
+			],
+			[
+				"colourte",
+				"src/params/ColourTechnique.xml"
+			],
+			[
+				"listcolourtec",
+				"src/visualisers/ListColourTechnique.cc"
+			],
+			[
+				"isopl",
+				"src/visualisers/IsoPlot.h"
+			],
+			[
+				"inputmatrixinter",
+				"src/decoders/InputMatrixInterpretor.cc"
+			],
+			[
+				"akima",
+				"src/visualisers/Akima760.cc"
+			],
+			[
+				"macro.py",
+				"python/Magics/macro.py"
+			],
+			[
+				"geoj",
+				"src/drivers/GeoJsonDriver.cc"
+			],
+			[
+				"laurra",
+				"~/laura/translate.py"
+			],
+			[
+				"polyline",
+				"src/common/Polyline.cc"
+			],
+			[
+				"projections",
+				"share/projections.json"
+			],
+			[
+				"magics_te",
+				"share/magics/title_template.xml"
+			],
+			[
+				"fortr",
+				"src/params/FortranViewNode.xml"
+			],
+			[
+				"magconfig.cc",
+				"src/web/MagConfig.cc"
+			],
+			[
+				"coastplotting",
+				"src/visualisers/CoastPlotting.cc"
+			],
+			[
+				"style2t",
+				"share/magics/styles/ecmwf/2t.json"
+			],
+			[
+				"fortran",
+				"src/basic/FortranMagics.cc"
+			],
+			[
+				"coastplotting.cc",
+				"src/visualisers/CoastPlotting.cc"
+			],
+			[
+				"magc",
+				"src/common/MagClipper.cc"
+			],
+			[
+				"poly",
+				"src/common/Polyline.cc"
+			],
+			[
+				"proj4p",
+				"src/common/Proj4Projection.cc"
+			],
+			[
+				"transformat",
+				"src/common/Transformation.h"
+			],
+			[
+				"transf",
+				"src/common/Transformation.cc"
+			],
+			[
+				"coastplotti",
+				"src/visualisers/CoastPlotting.h"
+			],
+			[
+				"prxml",
+				"src/params/Proj4TPers.xml"
+			],
+			[
+				"coastpl",
+				"src/visualisers/CoastPlotting.cc"
+			],
+			[
+				"stereo",
+				"src/common/PolarStereographicProjection.cc"
+			],
+			[
+				"axis",
+				"src/visualisers/Axis.cc"
+			],
+			[
+				"sca",
+				"share/magics/styles/ecmwf/scaling_celsius.json"
+			],
+			[
+				"view",
+				"src/basic/ViewNode.cc"
+			],
+			[
+				"contourl",
+				"src/visualisers/ContourLibrary.h"
+			],
+			[
+				"gribdecoder",
+				"src/decoders/GribDecoder.h"
+			],
+			[
+				"gribinterpretor",
+				"src/decoders/GribRegularInterpretor.cc"
+			],
+			[
+				"gribdec",
+				"src/decoders/GribDecoder.cc"
+			],
+			[
+				"grib",
+				"test/grib.py"
+			],
+			[
+				"uni",
+				"share/magics/units-rules.json"
+			],
+			[
+				"scaling_",
+				"share/magics/styles/ecmwf/scaling_pressure.json"
+			],
+			[
+				"scalin",
+				"share/magics/styles/ecmwf/scaling_celsius.json"
+			],
+			[
+				"isl2",
+				"share/magics/styles/ecmwf/cds_istl12.json"
+			],
+			[
+				"legend1",
+				"regression/gallery/legend1.py"
+			],
+			[
+				"contour1",
+				"regression/gallery/contour11.py"
+			],
+			[
+				"table_160",
+				"share/magics/table_160.xml"
+			],
+			[
+				"epsg.json",
+				"share/magics/epsg.json"
+			],
+			[
+				"netcdfdata",
+				"src/decoders/NetcdfData.h"
+			],
+			[
+				"netcdfg",
+				"src/decoders/NetcdfGeoMatrixInterpretor.h"
+			],
+			[
+				"netcdf",
+				"src/decoders/NetcdfData.h"
+			],
+			[
+				"table",
+				"share/magics/table_172.xml"
+			],
+			[
+				"tab",
+				"share/magics/table_132.xml"
+			],
+			[
+				"gr",
+				"src/decoders/GribRegularInterpretor.h"
+			],
+			[
+				"gribi",
+				"src/decoders/GribInterpretor.h"
+			],
+			[
+				"unit",
+				"share/magics/units-rules.json"
+			],
+			[
+				"magcon",
+				"src/web/MagConfig.h"
+			],
+			[
+				"gri",
+				"src/decoders/GribRegularInterpretor.cc"
+			],
+			[
+				"table_22",
+				"share/magics/table_228.xml"
+			],
+			[
+				"table_",
+				"share/magics/table_130.xml"
+			],
+			[
+				"tabl",
+				"share/magics/table_128.xml"
+			],
+			[
+				"styles",
+				"share/magics/styles/styles.json"
+			],
+			[
+				"inputdata",
+				"src/decoders/InputData.cc"
+			],
+			[
+				"viewnode.h",
+				"src/basic/ViewNode.h"
+			],
+			[
+				"viewnode",
+				"src/basic/ViewNode.cc"
+			],
+			[
+				"viewnode.cc",
+				"src/basic/ViewNode.cc"
+			],
+			[
+				"fortranview",
+				"src/params/FortranViewNode.xml"
+			],
+			[
+				"basicscne",
+				"src/basic/BasicSceneObject.h"
+			],
+			[
+				"coastlines.cc",
+				"src/visualisers/Coastlines.cc"
+			],
+			[
+				"layout",
+				"src/common/Layout.cc"
+			],
+			[
+				"bas",
+				"src/basic/BasicSceneObject.cc"
+			],
+			[
+				"viewnodex",
+				"src/params/FortranViewNode.xml"
+			],
+			[
+				"subpga",
+				"src/params/XmlSubPage.xml"
+			],
+			[
+				"vis",
+				"src/basic/VisualAction.cc"
+			],
+			[
+				"visual",
+				"src/basic/VisualAction.h"
+			],
+			[
+				"basic",
+				"src/basic/BasicSceneObject.cc"
+			],
+			[
+				"visu",
+				"src/basic/VisualAction.cc"
+			],
+			[
+				"basicsc",
+				"src/basic/BasicSceneObject.h"
+			],
+			[
+				"coastlih",
+				"src/visualisers/Coastlines.h"
+			],
+			[
+				"scenevisitor.cc",
+				"src/basic/SceneVisitor.cc"
+			],
+			[
+				"visualaction.cc",
+				"src/basic/VisualAction.cc"
+			],
+			[
+				"scenevisitor.h",
+				"src/basic/SceneVisitor.h"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 459.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/git/webdev-dev/webdev.sublime-project"
+			]
+		],
+		"width": 348.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": false,
+	"side_bar_visible": false,
+	"side_bar_width": 248.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
