@@ -13,7 +13,13 @@ import os
 import glob
 import unittest
 import subprocess
+import pytest
 
+
+@pytest.mark.optionalhook
+def pytest_html_results_table_html(report, data):
+    if report.passed:
+        data.append(html.div('link to image'))
 class MagicsSanityTest(unittest.TestCase):
     """
     A class with dynamically-generated test methods.
@@ -74,6 +80,7 @@ def generate_test_method(test_name, directory, output):
 
     return run_test
 
+
 # This code needs to be outside of `if __name__ == '__main__'` so the test methods are generated
 # at import time so that pytest can find them
 
@@ -85,7 +92,8 @@ for d in ["results"]:
         os.makedirs(d)
 
 os.chdir(DIR)
-for test_set in glob.glob("*"):
+#for test_set in glob.glob("*"):
+for test_set in ["efas", "data"]:
     print (test_set)
     try :
         os.chdir(test_set)
