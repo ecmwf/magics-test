@@ -58,6 +58,8 @@ def test_python(test_name, directory, output, reference, record_property):
         output_exists = os.path.isfile(output_name)
         assert output_exists == True
 
+        os.rename(output_name, os.path.join(directory, output_name))
+
 
         ref_exists = os.path.isfile(ref_name)
 
@@ -67,7 +69,7 @@ def test_python(test_name, directory, output, reference, record_property):
                 "compare",
                 "-metric AE",
                 "-dissimilarity-threshold 1",
-                output_name,
+                os.path.join(directory, output_name),
                 ref_name,
                 diff_name,
             ]
@@ -78,13 +80,14 @@ def test_python(test_name, directory, output, reference, record_property):
             diff = int(stderr)
             record_property("diff", diff)
             record_property("new-test", False)
-            assert diff < 30
+            move_output(output_name, output)
+            assert diff < 1000
             
        
             
         
 
-        move_output(output_name, output)
+        
 
         
 def cleanup_backup(backup_name, original_name):
