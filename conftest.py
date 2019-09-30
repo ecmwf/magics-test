@@ -15,7 +15,7 @@ def pytest_runtest_makereport(item, call):
         
         if properties.get("new-test", True):
             extra.append(pytest_html.extras.html("<table>"))
-            extra.append(pytest_html.extras.html("<tr><th colspan='2'>new test</th></tr>"))
+            extra.append(pytest_html.extras.html("<tr><th colspan='2'>new test : {} </th></tr>".format(properties["test_name"])))
             extra.append(pytest_html.extras.html("<tr>"))
             extra.append(pytest_html.extras.html("<td> <img src='{}' width='50%'/></td>".format(img)))
             extra.append(pytest_html.extras.html("<tr>"))
@@ -23,11 +23,14 @@ def pytest_runtest_makereport(item, call):
     
         else:
             diff = 'file://{}'.format(properties["diff-image"])
+            ref = 'file://{}'.format(properties["ref-image"])
             extra.append(pytest_html.extras.html("<table>"))
-            extra.append(pytest_html.extras.html("<tr><th colspan='2'>Difference in pixels : {} </th></tr>".format(properties.get("diff", "undef"))))
+            extra.append(pytest_html.extras.html("<tr><th colspan='2'>Difference in pixels : {} Test : {} </th></tr>".format(properties.get("diff", "undef"), properties["test_name"])))
             extra.append(pytest_html.extras.html("<tr>"))
             extra.append(pytest_html.extras.html("<td> <img src='{}' width='50%'/></td>".format(img)))
+            
             extra.append(pytest_html.extras.html("<td> <img src='{}'  width='50%'/></td>".format(diff)))
+            extra.append(pytest_html.extras.html("<td> <img src='{}'  width='50%'/></td>".format(ref)))
             extra.append(pytest_html.extras.html("<tr>"))
             extra.append(pytest_html.extras.html("</table>"))
         xfail = hasattr(report, 'wasxfail')

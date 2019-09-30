@@ -79,8 +79,9 @@ def test_python(test_name, directory, output, reference, record_property):
             _, stderr = p.communicate()
             diff = int(stderr)
             record_property("diff", diff)
+            record_property("ref-image",ref_name)
             record_property("new-test", False)
-            move_output(output_name, output)
+           
             assert diff < 1000
             
        
