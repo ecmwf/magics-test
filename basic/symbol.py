@@ -66,7 +66,7 @@ for i in range(0,30) :
     xx = x
    
     for size in sizes:
-    	title = "symbol_marker_index = %i"% i
+        title = "symbol_marker_index = %i"% i
     # Import the input data
         out.append(minput(input_x_values=[ xx],
 		        input_y_values=[y],

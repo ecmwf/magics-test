@@ -14,7 +14,7 @@ from Magics.macro import *
 
 ref = 'plumes'
 output = output(
-    output_formats=['ps'],
+    output_formats=['png'],
     output_name_first_page_number='off',
     output_name=ref,
     super_page_y_length=29.7,

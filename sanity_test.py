@@ -16,16 +16,77 @@ import subprocess
 import pytest
 
 
-@pytest.mark.optionalhook
-def pytest_html_results_table_html(report, data):
-    if report.passed:
-        data.append(html.div('link to image'))
+
 class MagicsSanityTest(unittest.TestCase):
     """
     A class with dynamically-generated test methods.
     """
     pass
+tests=[]
+def add_test(script, directory, output, reference):
+    tests.append((script, directory, output, reference))
 
+
+@pytest.mark.parametrize("test_name, directory, output, reference", tests)
+def test_python(test_name, directory, output, reference, record_property):
+        os.chdir(directory)
+
+        record_property("test_name", test_name)
+        record_property("directory", directory)
+        record_property("reference", reference)
+        record_property("output", output)
+        
+        
+       
+        # backup any existing files with our expected output_name
+        output_name = "{}.png".format(test_name)
+        backup_name = output_name + ".backup"
+        ref_name = "{}/{}".format(reference,output_name)
+        diff_name = "{}/{}_diff.png".format(reference,test_name)
+        record_property("diff-image", diff_name)
+        
+        # run the test
+        try :
+            subprocess.check_call(["python3",  "{}.py".format(test_name)])
+        except e:
+            print (e)
+            assert False
+
+        
+        record_property("new-test", True)
+
+        output_exists = os.path.isfile(output_name)
+        assert output_exists == True
+
+
+        ref_exists = os.path.isfile(ref_name)
+
+        if ref_exists:
+
+            cmdline = [
+                "compare",
+                "-metric AE",
+                "-dissimilarity-threshold 1",
+                output_name,
+                ref_name,
+                diff_name,
+            ]
+            p = subprocess.Popen(" ".join(cmdline), shell=True,
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
+            _, stderr = p.communicate()
+            diff = int(stderr)
+            record_property("diff", diff)
+            record_property("new-test", False)
+            assert diff < 30
+            
+       
+            
+        
+
+        move_output(output_name, output)
+
+        
 def cleanup_backup(backup_name, original_name):
     """
     Move a backed-up file back to its original name.
@@ -42,8 +103,10 @@ def cleanup_output(output_name):
     os.remove(output_name)
 
 def move_output(output_name, directory):
-    print("moving {}".format(output_name))
     os.rename(output_name, os.path.join(directory, output_name))
+
+
+    
 
 def generate_test_method(test_name, directory, output):
     """
@@ -54,8 +117,14 @@ def generate_test_method(test_name, directory, output):
     """
     directory=directory
     output=output
+    
+    
+
     def run_test(self):
         os.chdir(directory)
+        
+        #record_property("gfhjgdhjs")
+       
         # backup any existing files with our expected output_name
         output_name = "{}.png".format(test_name)
         backup_name = output_name + ".backup"
@@ -63,6 +132,7 @@ def generate_test_method(test_name, directory, output):
             os.rename(output_name, backup_name)
             self.addCleanup(cleanup_backup, backup_name, output_name)
         
+        print("Adding test: {}".format(method_name))
         # run the test
         ret = subprocess.call("python {}.py".format(test_name), shell=True)
         self.assertEqual(ret, 0)
@@ -85,23 +155,24 @@ def generate_test_method(test_name, directory, output):
 # at import time so that pytest can find them
 
 
+magics = MagicsSanityTest()
 DIR = os.environ.get('PWD', None)
 
-for d in ["results"]:
+for d in ["results", "reference"]:
     if not os.path.exists(d):
         os.makedirs(d)
 
 os.chdir(DIR)
-#for test_set in glob.glob("*"):
-for test_set in ["efas", "data"]:
+for test_set in glob.glob("*"):
     print (test_set)
     try :
-        os.chdir(test_set)
+        os.chdir(os.path.join(DIR,test_set))
         for file_name in glob.glob("*.py"):
             test_name = os.path.splitext(file_name)[0]
             method_name = "test_{}_{}".format(test_set,test_name)
             print("Adding test: {}".format(method_name))
-            setattr(MagicsSanityTest, method_name, generate_test_method(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results")))
+            add_test(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results"), os.path.join(DIR, "reference"))
+            #setattr(MagicsSanityTest, method_name, generate_test_method(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results")))
     except:
         os.chdir(DIR)
 

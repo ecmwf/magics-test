@@ -9,8 +9,10 @@
 from csv import reader
 from datetime import datetime
 from Magics.macro import *
+
+
 #read input file
-f= file('boxplot.data','rb')
+f= open('boxplot.data','r')
 r= reader(f,delimiter=';')
 rows= []
 for row in r:
@@ -116,18 +118,7 @@ for row in rows:
 	max_y=    max([max_y]+values)
 	min_y=    min([min_y]+values)
 
-#################################################################
-#test
-for key in data:
-	obj= data[key]
-	if type(obj)==type({}):
-		for k2 in obj: print key,k2,obj[k2]
-	else:
-		print key, obj
-print 'limits values:'
-print 'x:',[min_date,max_date]
-print 'y:',[min_y,max_y]
-#################################################################
+
 
 output = output(output_formats=['png'],
                 output_name_first_page_number='off',
@@ -257,7 +248,7 @@ dwd_symb = msymb(
 
 # wb_for for dwd
 dates = [min_date, max_date]
-print data["THlow"]
+
 lows = [data["THlow"], data["THlow"]]
 mediums = [data["THmedium"], data["THmedium"]]
 highs = [data["THHigh"], data["THHigh"]]

@@ -12,7 +12,8 @@ from Magics.macro import *
 
 # Setting of the output file name
 
-output = output(output_formats=['ps'], output_name='epsgram_sample',
+output = output(output_formats=['png'], output_name='epsgram_sample',
+                output_name_first_page_number = "off",
                 super_page_y_length=29.7, super_page_x_length=21.)
 
 # define the cartesian projection

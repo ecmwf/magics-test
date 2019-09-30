@@ -1,4 +1,5 @@
 import pytest
+
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
     pytest_html = item.config.pluginmanager.getplugin('html')
@@ -7,11 +8,31 @@ def pytest_runtest_makereport(item, call):
     extra = getattr(report, 'extra', [])
     if report.when == 'call':
         # always add url to report
-        extra.append(pytest_html.extras.html('<div> ' + str(report.keywords) + 'need to add the info of teh regression here<br/> hgjksdhdg</div>'))
-        #extra.append(pytest_html.extras.url('http://www.ecmwf.int/'))
-
+        properties = {}
+        for k, v in report.user_properties:
+            properties[k] = v
+        img = 'file://{}/{}.png'.format(properties["output"], properties["test_name"])
+        
+        if properties.get("new-test", True):
+            extra.append(pytest_html.extras.html("<table>"))
+            extra.append(pytest_html.extras.html("<tr><th colspan='2'>new test</th></tr>"))
+            extra.append(pytest_html.extras.html("<tr>"))
+            extra.append(pytest_html.extras.html("<td> <img src='{}' width='50%'/></td>".format(img)))
+            extra.append(pytest_html.extras.html("<tr>"))
+            extra.append(pytest_html.extras.html("</table>"))
+    
+        else:
+            diff = 'file://{}'.format(properties["diff-image"])
+            extra.append(pytest_html.extras.html("<table>"))
+            extra.append(pytest_html.extras.html("<tr><th colspan='2'>Difference in pixels : {} </th></tr>".format(properties.get("diff", "undef"))))
+            extra.append(pytest_html.extras.html("<tr>"))
+            extra.append(pytest_html.extras.html("<td> <img src='{}' width='50%'/></td>".format(img)))
+            extra.append(pytest_html.extras.html("<td> <img src='{}'  width='50%'/></td>".format(diff)))
+            extra.append(pytest_html.extras.html("<tr>"))
+            extra.append(pytest_html.extras.html("</table>"))
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             # only add additional html on failure
             extra.append(pytest_html.extras.html('<div>Additional HTML</div>'))
         report.extra = extra
+

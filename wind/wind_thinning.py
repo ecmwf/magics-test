@@ -108,6 +108,6 @@ legend = mlegend(legend= 'on',
 	   legend_text_font_size = "0.5")
 
 #To the plot
-plot(output, polar, background,speed, contour, data, wind,foreground, title, legend)
+plot(output, polar, background, data, wind,foreground, title, legend)
 #plot(output, area, background, data, wind, speed, contour, foreground, title, legend)
 

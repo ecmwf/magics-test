@@ -9,7 +9,7 @@
 
 from Magics.macro import *
 
-output = output(output_formats=['ps'],
+output = output(output_formats=['png'],
                 output_name_first_page_number='off',
                 output_name="tephi")
 
