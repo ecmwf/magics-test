@@ -5,7 +5,7 @@ This test suite runs the regression tests for the [Magics](https://confluence.ec
 
 ## Running the test suite
 
-To come ...
+pytest --html report.html
 
 
 ## License
