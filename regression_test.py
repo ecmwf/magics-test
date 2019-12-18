@@ -17,11 +17,6 @@ import pytest
 
 
 
-class MagicsSanityTest(unittest.TestCase):
-    """
-    A class with dynamically-generated test methods.
-    """
-    pass
 tests=[]
 def add_test(script, directory, output, reference):
     tests.append((script, directory, output, reference))
@@ -159,7 +154,6 @@ def generate_test_method(test_name, directory, output):
 # at import time so that pytest can find them
 
 
-magics = MagicsSanityTest()
 DIR = os.environ.get('PWD', None)
 
 for d in ["results", "reference"]:
@@ -176,7 +170,6 @@ for test_set in glob.glob("*"):
             method_name = "test_{}_{}".format(test_set,test_name)
             print("Adding test: {}".format(method_name))
             add_test(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results"), os.path.join(DIR, "reference"))
-            #setattr(MagicsSanityTest, method_name, generate_test_method(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results")))
     except:
         os.chdir(DIR)
 
