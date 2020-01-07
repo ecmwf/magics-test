@@ -158,7 +158,7 @@ for d in ["results", "reference"]:
         os.makedirs(d)
 
 os.chdir(DIR)
-for test_set in glob.glob("."):
+for test_set in glob.glob("*"):
     print (test_set)
     try :
         os.chdir(os.path.join(DIR,test_set))
