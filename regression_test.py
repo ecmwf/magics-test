@@ -52,10 +52,6 @@ def test_python(test_name, directory, output, reference, record_property):
 
         output_exists = os.path.isfile(output_name)
         assert output_exists == True
-
-        os.rename(output_name, os.path.join(directory, output_name))
-
-
         ref_exists = os.path.isfile(ref_name)
 
         if ref_exists:
@@ -79,6 +75,7 @@ def test_python(test_name, directory, output, reference, record_property):
            
             assert diff < 1000
             
+        os.rename(output_name, os.path.join(output, output_name))
        
             
         
@@ -161,7 +158,7 @@ for d in ["results", "reference"]:
         os.makedirs(d)
 
 os.chdir(DIR)
-for test_set in glob.glob("*"):
+for test_set in glob.glob("data"):
     print (test_set)
     try :
         os.chdir(os.path.join(DIR,test_set))
