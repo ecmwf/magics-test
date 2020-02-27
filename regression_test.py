@@ -72,10 +72,10 @@ def test_python(test_name, directory, output, reference, record_property):
             record_property("diff", diff)
             record_property("ref-image",ref_name)
             record_property("new-test", False)
+            os.rename(output_name, os.path.join(output, output_name))
            
-            assert diff < 1000
+            assert diff < 2000
             
-        os.rename(output_name, os.path.join(output, output_name))
        
             
         
@@ -158,7 +158,7 @@ for d in ["results", "reference"]:
         os.makedirs(d)
 
 os.chdir(DIR)
-for test_set in glob.glob("*"):
+for test_set in glob.glob("test/*"):
     print (test_set)
     try :
         os.chdir(os.path.join(DIR,test_set))

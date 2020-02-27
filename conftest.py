@@ -27,10 +27,9 @@ def pytest_runtest_makereport(item, call):
             extra.append(pytest_html.extras.html("<table>"))
             extra.append(pytest_html.extras.html("<tr><th colspan='2'>Difference in pixels : {} Test : {} </th></tr>".format(properties.get("diff", "undef"), properties["test_name"])))
             extra.append(pytest_html.extras.html("<tr>"))
-            extra.append(pytest_html.extras.html("<td> <img src='{}' width='50%'/></td>".format(img)))
-            
+            extra.append(pytest_html.extras.html("<td> <img src='{}' width='50%'/></td>".format(ref)))
             extra.append(pytest_html.extras.html("<td> <img src='{}'  width='50%'/></td>".format(diff)))
-            extra.append(pytest_html.extras.html("<td> <img src='{}'  width='50%'/></td>".format(ref)))
+            extra.append(pytest_html.extras.html("<td> <img src='{}'  width='50%'/></td>".format(img)))
             extra.append(pytest_html.extras.html("<tr>"))
             extra.append(pytest_html.extras.html("</table>"))
         xfail = hasattr(report, 'wasxfail')
