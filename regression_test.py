@@ -16,6 +16,13 @@ import subprocess
 import pytest
 
 
+thresholds = {
+ 
+    "contour2" : 2500,
+    
+}
+
+skips = [  "projection5", "proj-regression-lambert_north_atlantic", ]
 
 tests=[]
 def add_test(script, directory, output, reference):
@@ -74,7 +81,7 @@ def test_python(test_name, directory, output, reference, record_property):
             record_property("new-test", False)
             os.rename(output_name, os.path.join(output, output_name))
            
-            assert diff < 2000
+            assert diff < thresholds.get(test_name, 2000)
             
        
             
@@ -166,7 +173,8 @@ for test_set in glob.glob("test/*"):
             test_name = os.path.splitext(file_name)[0]
             method_name = "test_{}_{}".format(test_set,test_name)
             print("Adding test: {}".format(method_name))
-            add_test(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results"), os.path.join(DIR, "reference"))
+            if test_name not in skips:
+                add_test(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results"), os.path.join(DIR, "reference"))
     except:
         os.chdir(DIR)
 
