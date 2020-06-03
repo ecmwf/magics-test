@@ -18,7 +18,7 @@ output = output(output_formats = ['png'],
 		output_name = ref)
 
 #Setting the coordinates of the geographical area
-projection = mmap(subpage_map_projection = 'cylindrical')
+projection = mmap(page_id_line ="off', ubpage_map_projection = 'cylindrical')
 
 
 #Coastlines setting
