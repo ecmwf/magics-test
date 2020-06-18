@@ -21,7 +21,7 @@ thresholds = {
     "bar_horizontal2" : 2500,
     "taylor" : 2500,
     "logarithmic" : 2750,
-    "box_plotreg" : 7000,
+    "boxplot_reg" : 7000,
     "graph9" : 2500,
     "graph3" : 2500,
     "graph8" : 6000,
