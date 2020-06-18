@@ -17,12 +17,10 @@ import pytest
 
 
 thresholds = {
- 
     "contour2" : 2500,
-    
 }
 
-skips = [  "projection5", "proj-regression-lambert_north_atlantic", ]
+skips = [  "projection5", "proj-regression-lambert_north_atlantic", "xarray3", "xarray6", "xarray7"]
 
 tests=[]
 def add_test(script, directory, output, reference):
