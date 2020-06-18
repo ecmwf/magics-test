@@ -18,9 +18,19 @@ import pytest
 
 thresholds = {
     "contour2" : 2500,
+    "bar_horizontal2" : 2500,
+    "taylor" : 2500,
+    "logarithmic" : 2750,
+    "box_plotreg" : 7000,
+    "graph9" : 2500,
+    "graph3" : 2500,
+    "graph8" : 6000,
+    "epsrose" : 5000,
+    "coastlines2" : 2500,
 }
 
-skips = [  "projection5", "proj-regression-lambert_north_atlantic", "xarray3", "xarray6", "xarray7"]
+skips = [  "projection5", "proj-regression-lambert_north_atlantic", 
+		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7"]
 
 tests=[]
 def add_test(script, directory, output, reference):
