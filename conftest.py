@@ -1,7 +1,11 @@
 import pytest
+import os
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
+    if os.environ.get("REGRESSION_MODE") == "off" :
+        yield
+        return
     pytest_html = item.config.pluginmanager.getplugin('html')
     outcome = yield
     report = outcome.get_result()
