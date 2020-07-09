@@ -67,6 +67,10 @@ def test_python(test_name, directory, output, reference, record_property):
 
         output_exists = os.path.isfile(output_name)
         assert output_exists == True
+        
+        if os.environ.get("REGRESSION_MODE") == "off" :
+            return
+
         ref_exists = os.path.isfile(ref_name)
 
         if ref_exists:
@@ -166,7 +170,7 @@ def generate_test_method(test_name, directory, output):
 # at import time so that pytest can find them
 
 
-DIR = os.environ.get('PWD', None)
+DIR = os.environ.get('PWD', ".")
 
 for d in ["results", "reference"]:
     if not os.path.exists(d):
