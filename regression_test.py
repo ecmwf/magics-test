@@ -182,7 +182,7 @@ for d in ["results", "reference"]:
         os.makedirs(d)
 
 os.chdir(DIR)
-for test_set in glob.glob("test/*"):
+for test_set in glob.glob("test/ax*"):
     print (test_set)
     try :
         os.chdir(os.path.join(DIR,test_set))
