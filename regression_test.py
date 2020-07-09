@@ -41,19 +41,24 @@ def add_test(script, directory, output, reference):
 def test_python(test_name, directory, output, reference, record_property):
         os.chdir(directory)
 
-        record_property("test_name", test_name)
-        record_property("directory", directory)
-        record_property("reference", reference)
-        record_property("output", output)
-        
+
+        if os.environ.get("REGRESSION_MODE") != "off" :
+            
+            record_property("test_name", test_name)
+            record_property("directory", directory)
+            record_property("reference", reference)
+            record_property("output", output)
+            diff_name = "{}/{}_diff.png".format(reference,test_name)
+            record_property("diff-image", diff_name)
+            record_property("new-test", True)
+            
         
        
         # backup any existing files with our expected output_name
         output_name = "{}.png".format(test_name)
         backup_name = output_name + ".backup"
         ref_name = "{}/{}".format(reference,output_name)
-        diff_name = "{}/{}_diff.png".format(reference,test_name)
-        record_property("diff-image", diff_name)
+        
         
         # run the test
         try :
@@ -63,7 +68,7 @@ def test_python(test_name, directory, output, reference, record_property):
             assert False
 
         
-        record_property("new-test", True)
+        
 
         output_exists = os.path.isfile(output_name)
         assert output_exists == True
