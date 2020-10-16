@@ -11,12 +11,15 @@
 from Magics.macro import *
 
 #Example reference
-ref = 'wind1'
+ref = '/Users/sylvie/git/magics-test/test/gallery/wind1'
 
 #Setting of the output file name
 output = output(output_formats= ['png'],
                 output_name_first_page_number= 'off',
-                output_name= ref)
+                output_name= ref,
+                metadata_path = "/Users/sylvie/git/magics-test/test/gallery/wind1.json"
+
+                )
 
 #Setting the coordinates of the geographical area
 australia = mmap(subpage_upper_right_longitude= 180.,
@@ -54,7 +57,7 @@ msl =  mgrib( grib_input_file_name = './msl.grb',
 
 #Define the simple contouring for msl
 msl_contour = mcont(
-		legend= 'off', 
+		legend= 'on', 
 		contour_level_selection_type= 'interval',
                 contour_interval= 5.,
                 contour_line_colour= 'black',
@@ -70,7 +73,7 @@ msl_contour = mcont(
                 )
 
 #Import the  wind speed at 200hPa speed200 
-speed200 =  mgrib( grib_input_file_name = './speed200.grb',
+speed200 =  mgrib( grib_input_file_name = '/Users/sylvie/git/magics-test/test/gallery//speed200.grb',
                 grib_id= 't850')
 
 #Define the shading for the wind speed
@@ -95,7 +98,7 @@ speed200_contour = mcont(
 
 
 #Import the  wind  at 200hPa uv200 
-uv200 =  mgrib( grib_input_file_name = './uv200.grb',
+uv200 =  mgrib( grib_input_file_name = '/Users/sylvie/git/magics-test/test/gallery//uv200.grb',
                 grib_id= 'uv200')
 
 uv200_wind = mwind(
@@ -129,9 +132,5 @@ legend = mlegend(legend= 'on',
 	   legend_text_font_size = "0.5")
 
 #To the plot
-plot(output, australia, background,speed200, speed200_contour,uv200, uv200_wind,msl, msl_contour,foreground, title, legend)
+plot(output, australia, background,speed200, speed200_contour, uv200, uv200_wind,foreground, title, legend)
 
-#For documentation only
-tofortran(ref, output, australia, background,speed200, speed200_contour,uv200, uv200_wind,msl, msl_contour,foreground, title, legend)
-tomv4(ref,uv200_wind)
-tohtml(ref,uv200_wind)

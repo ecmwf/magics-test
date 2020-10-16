@@ -15,7 +15,8 @@ data = mgrib(grib_input_file_name='Total_precipitation.grib',grib_field_position
 output = output(
 	output_formats                = ['png'],
 	output_name                   = 'contour11',
-	output_name_first_page_number = 'off')
+	output_name_first_page_number = 'off', 
+	metadata_path = 'contour.json')
 
 #Setting the geographical area
 area = mmap(
@@ -24,6 +25,7 @@ area = mmap(
 	subpage_map_projection         = 'cylindrical',
 	subpage_upper_right_latitude   = 5.764877,
 	subpage_upper_right_longitude  = -31.892998,
+	
 )    
 
 #Setting the coastlines
@@ -64,7 +66,10 @@ title = mtext(
 #Plotting
 plot(output,area,background,data,title,contour,foreground)
 
-#For documentation only
-tofortran('contour11',output,area,data,background,contour,foreground,title)
-tomv4('contour11',contour)
-tohtml('contour11',data,contour)
+
+import json
+
+with open('contour.json', 'r') as f:
+	data = json.load(f)
+
+print(json.dumps(data, indent=2))

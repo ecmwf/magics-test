@@ -21,7 +21,7 @@ param4 = "PM10_USI"
 
 height = 5.5
 y = 21.
-output = output(output_formats=['png'],  
+output = output(output_formats=['pdf'],  
                 output_name_first_page_number = "off",
                 output_name='raqgram',
                 super_page_y_length=29.7, super_page_x_length=21.)
