@@ -18,7 +18,12 @@ output = output(output_formats = ['png'],
 		output_name = ref)
 
 #Setting the coordinates of the geographical area
-projection = mmap(subpage_map_projection = 'cylindrical')
+projection = mmap(subpage_map_projection = 'geos',
+        subpage_map_vertical_longitude = -20,
+        subpage_x_position     = 20,
+        subpage_y_position     = 3,
+        subpage_x_length       = 86,
+        subpage_y_length       = 86,)
 
 
 #Coastlines setting
@@ -30,20 +35,18 @@ coast = mcoast( map_grid =  "on",
 
 
 #Import the z500 data 
-z500 =  mgrib(grib_input_file_name  = "z500.grb",
-              grib_id =  "z500")
+data =  mgrib(grib_input_file_name  = "sim_ir9.grib",)
 
 
 #Define the simple contouring for z500
-z500_contour = mcont( legend = "off",
-                contour_line_colour = "navy",
-                contour_line_thickness =  2,
-                contour_label =  "on",
-                contour_highlight_colour =  "navy",
-                contour_highlight_thickness =  6 )
+contour = mcont( contour_automatic_setting = "ecmwf",
+        legend = "on" )
 
 
-
+legend = mlegend(
+        legend_text_font_size  = 0.25,
+        legend_label_frequency = 3
+        )
 
 
 title = mtext(
@@ -56,12 +59,8 @@ title = mtext(
 
 
 #To the plot
-plot(output, projection, coast, z500, z500_contour, title)
+plot(output, projection, coast, data, contour, title, legend)
 
-#For documentation only
-tofortran(ref, output, projection, coast, z500, z500_contour, title)
-tomv4(ref, z500_contour)
-tohtml(ref, z500, z500_contour)
 
 
 

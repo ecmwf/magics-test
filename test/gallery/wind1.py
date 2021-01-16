@@ -132,5 +132,5 @@ legend = mlegend(legend= 'on',
 	   legend_text_font_size = "0.5")
 
 #To the plot
-plot(output, australia, background,speed200, speed200_contour, uv200, uv200_wind,foreground, title, legend)
+plot(output, australia, background, speed200, speed200_contour, uv200, uv200_wind,foreground, msl, msl_contour, title, legend)
 

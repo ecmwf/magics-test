@@ -89,6 +89,6 @@ legend = mlegend(legend= 'on',
 	   legend_text_font_size = "0.5")
 
 #To the plot
-plot(output, area, background, data, wind,foreground, title, legend)
+plot(output, area, background, data, wind,foreground, title)
 #plot(output, area, background, data, wind, speed, contour, foreground, title, legend)
 

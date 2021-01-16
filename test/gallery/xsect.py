@@ -21,7 +21,7 @@ output = output(output_formats = ['png'],
 projection = mmap(subpage_map_projection = 'cartesian',
 			subpage_x_axis_type = 'regular',
 			subpage_y_axis_type = 'regular',
-			subpage_x_min = -90.,
+			subpage_x_min = 0.,
 			subpage_x_max = 90.,
 			subpage_y_min = 1000.,
 			subpage_y_max = 50.)
@@ -48,7 +48,7 @@ data = netcdf = mnetcdf(
 				#netcdf_type = "matrix",
                 netcdf_filename = "avg_data.nc",
                 netcdf_y_variable = "v_lev",
-                netcdf_x_variable = "lon",
+                netcdf_x_variable = "lat",
                 netcdf_value_variable = "v"
                     )
 contour = mcont()

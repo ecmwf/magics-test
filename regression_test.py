@@ -27,6 +27,7 @@ thresholds = {
     "graph8" : 6000,
     "epsrose" : 5000,
     "coastlines2" : 2500,
+   "epsgram_sample" : 11000
 }
 
 skips = [  "projection5", "proj-regression-lambert_north_atlantic", 

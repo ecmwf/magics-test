@@ -46,7 +46,7 @@ cold =  mgeojson( geojson_input_filename = 'cold_fronts.geojson',)
 blue = mline(polyline_line_colour = "blue", polyline_line_thickness = 2)
 
 warm =  mgeojson( geojson_input_filename = 'warm_fronts.geojson',)
-red = mline(polyline_line_colour = "red", polyline_line_thickness = 2)
+red = mline(legend = "on", polyline_line_colour = "red", polyline_line_thickness = 2)
 
 
 title = mtext(text_lines = ["<font size='1'>GeoJSon First example</font>",
@@ -73,5 +73,5 @@ legend = mlegend(legend= 'on',
 	   legend_text_font_size = "0.5")
 
 #To the plot
-plot(output, background, warm, red, cold, blue, foreground, title, legend)
+plot(output, background, warm, red, cold, blue, foreground, title)
 

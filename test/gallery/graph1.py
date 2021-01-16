@@ -30,14 +30,14 @@ projection = mmap(subpage_map_projection = 'cartesian',
 vertical = maxis(axis_orientation = "vertical",
 				 axis_grid =  "on",
 				 axis_grid_colour = "grey",
-				 axis_grid_thickness = 1,
+				 axis_grid_thickness = 2,
 				 axis_grid_line_style = "dot")
 
 #Horizontal axis
 horizontal = maxis(axis_orientation = "horizontal",
 				 axis_grid =  "on",
 				 axis_grid_colour = "grey",
-				 axis_grid_thickness = 1,
+				 axis_grid_thickness = 2,
 				 axis_grid_line_style = "dot")
 
 
@@ -71,7 +71,8 @@ title = mtext(
 
 
 #To the plot
-plot(output, projection, vertical, horizontal, input, graph, title)
+#plot(output, projection, vertical, horizontal, input, graph, title)
+plot(output, projection, input, graph, vertical, horizontal, title)
 
 #For documentation only
 tofortran(ref, output, projection, vertical, horizontal, input, graph, title)
