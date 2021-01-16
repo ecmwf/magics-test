@@ -1,3 +1,4 @@
+
 # (C) Copyright 1996-2016 ECMWF.
 # 
 # This software is licensed under the terms of the Apache Licence Version 2.0
@@ -18,12 +19,7 @@ output = output(output_formats = ['png'],
 		output_name = ref)
 
 #Setting the coordinates of the geographical area
-projection = mmap(subpage_map_projection = 'geos',
-        subpage_map_vertical_longitude = -20,
-        subpage_x_position     = 20,
-        subpage_y_position     = 3,
-        subpage_x_length       = 86,
-        subpage_y_length       = 86,)
+projection = mmap(subpage_map_projection = 'cylindrical')
 
 
 #Coastlines setting
@@ -35,18 +31,20 @@ coast = mcoast( map_grid =  "on",
 
 
 #Import the z500 data 
-data =  mgrib(grib_input_file_name  = "sim_ir9.grib",)
+z500 =  mgrib(grib_input_file_name  = "z500.grb",
+              grib_id =  "z500")
 
 
 #Define the simple contouring for z500
-contour = mcont( contour_automatic_setting = "ecmwf",
-        legend = "on" )
+z500_contour = mcont( legend = "off",
+                contour_line_colour = "navy",
+                contour_line_thickness =  2,
+                contour_label =  "on",
+                contour_highlight_colour =  "navy",
+                contour_highlight_thickness =  6 )
 
 
-legend = mlegend(
-        legend_text_font_size  = 0.25,
-        legend_label_frequency = 3
-        )
+
 
 
 title = mtext(
@@ -59,9 +57,7 @@ title = mtext(
 
 
 #To the plot
-plot(output, projection, coast, data, contour, title, legend)
-
-
+plot(output, projection, coast, z500, z500_contour, title)
 
 
 
