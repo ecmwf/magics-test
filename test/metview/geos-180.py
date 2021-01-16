@@ -13,7 +13,7 @@ from Magics.macro import *
 import numpy
 
 
-ref = 'geos-140'
+ref = 'geos-180'
 #Setting of the output file name
 
 png = output(output_formats = ['png'],
@@ -24,7 +24,7 @@ png = output(output_formats = ['png'],
 
 #Setting the coordinates of the geographical area
 projection = mmap(subpage_map_projection = 'geos',
-        subpage_map_vertical_longitude = -140.,
+        subpage_map_vertical_longitude = -180.,
         page_frame="off",
         subpage_frame="off",
 	  )
