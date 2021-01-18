@@ -21,7 +21,6 @@ def test_python(test_name, directory, output, reference):
 
         output_name = "{}.png".format(test_name)
         
-        
         # run the test
         try :
             subprocess.check_call(["python3",  "{}.py".format(test_name)])

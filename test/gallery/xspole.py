@@ -10,7 +10,6 @@
 #importing Magics module
 from Magics.macro import *
 
-unmute()
 
 ref = 'xspole'
 #Setting of the output file name

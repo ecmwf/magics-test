@@ -11,13 +11,12 @@
 from Magics.macro import *
 
 #Example reference
-ref = '/Users/sylvie/git/magics-test/test/gallery/wind1'
+ref = 'wind1'
 
 #Setting of the output file name
 output = output(output_formats= ['png'],
                 output_name_first_page_number= 'off',
                 output_name= ref,
-                metadata_path = "/Users/sylvie/git/magics-test/test/gallery/wind1.json"
 
                 )
 
@@ -73,7 +72,7 @@ msl_contour = mcont(
                 )
 
 #Import the  wind speed at 200hPa speed200 
-speed200 =  mgrib( grib_input_file_name = '/Users/sylvie/git/magics-test/test/gallery//speed200.grb',
+speed200 =  mgrib( grib_input_file_name = 'speed200.grb',
                 grib_id= 't850')
 
 #Define the shading for the wind speed
@@ -98,7 +97,7 @@ speed200_contour = mcont(
 
 
 #Import the  wind  at 200hPa uv200 
-uv200 =  mgrib( grib_input_file_name = '/Users/sylvie/git/magics-test/test/gallery//uv200.grb',
+uv200 =  mgrib( grib_input_file_name = 'uv200.grb',
                 grib_id= 'uv200')
 
 uv200_wind = mwind(
