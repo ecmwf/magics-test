@@ -100,7 +100,7 @@ legend = mlegend(legend_user_lines = ["Rain", "Freezing rain", "Snow", "Wet snow
 
 
 #To the plot
-plot(output, projection, coast, precip, contour, title, legend)
+plot(output, projection, coast, precip, contour, title)
 
 
 

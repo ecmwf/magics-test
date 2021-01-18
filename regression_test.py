@@ -27,12 +27,14 @@ thresholds = {
     "graph8" : 6000,
     "epsrose" : 5000,
     "coastlines2" : 2500,
-   "epsgram_sample" : 11000
+   "epsgram_sample" : 11000,
+   "xy_wind" : 4300, 
 }
 
 skips = [  "projection5", "proj-regression-lambert_north_atlantic", 
-		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7"]
+		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
 
+next = ["plumes", "tpers", "xspole", "geos-180", "geos-90", "geos180", "geos140", "geos-140"]
 tests=[]
 def add_test(script, directory, output, reference):
     tests.append((script, directory, output, reference))
