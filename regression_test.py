@@ -28,13 +28,13 @@ thresholds = {
     "epsrose" : 5000,
     "coastlines2" : 2500,
    "epsgram_sample" : 11000,
-   "xy_wind" : 4300, 
+   "xy_wind" : 4500, 
 }
 
-skips = [  "projection5", "proj-regression-lambert_north_atlantic", 
+skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
 		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
 
-next = ["plumes", "tpers", "xspole", "geos-180", "geos-90", "geos180", "geos140", "geos-140"]
+next_release = ["plumes", "tpers", "xspole", "geos-180", "geos-90", "geos180", "geos140", "geos-140"]
 tests=[]
 def add_test(script, directory, output, reference):
     tests.append((script, directory, output, reference))
@@ -42,8 +42,10 @@ def add_test(script, directory, output, reference):
 
 @pytest.mark.parametrize("test_name, directory, output, reference", tests)
 def test_python(test_name, directory, output, reference, record_property):
-        os.chdir(directory)
 
+
+
+        os.chdir(directory)
 
         if os.environ.get("REGRESSION_MODE") != "off" :
             
@@ -55,6 +57,9 @@ def test_python(test_name, directory, output, reference, record_property):
             record_property("diff-image", diff_name)
             record_property("new-test", True)
             
+        if test_name in skips:
+           pytest.xfail("Test testing a new feature : expected to fail")
+           assert False
         
        
         # backup any existing files with our expected output_name
@@ -67,7 +72,7 @@ def test_python(test_name, directory, output, reference, record_property):
         try :
             subprocess.check_call(["python3",  "{}.py".format(test_name)])
         except Exception as e:
-            print (e)
+            
             assert False
 
         
@@ -101,6 +106,8 @@ def test_python(test_name, directory, output, reference, record_property):
             record_property("new-test", False)
             os.rename(output_name, os.path.join(output, output_name))
            
+            if test_name in next_release:
+                pytest.xfail("Test testing a new feature : expected to fail")
             assert diff < thresholds.get(test_name, 2000)
             
        
@@ -193,8 +200,7 @@ for test_set in glob.glob("test/*"):
             test_name = os.path.splitext(file_name)[0]
             method_name = "test_{}_{}".format(test_set,test_name)
             print("Adding test: {}".format(method_name))
-            if test_name not in skips:
-                add_test(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results"), os.path.join(DIR, "reference"))
+            add_test(test_name, os.path.join(DIR,test_set), os.path.join(DIR, "results"), os.path.join(DIR, "reference"))
     except:
         os.chdir(DIR)
 
