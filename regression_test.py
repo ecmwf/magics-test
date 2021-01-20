@@ -34,7 +34,8 @@ thresholds = {
 skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
 		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
 
-next_release = ["plumes", "tpers", "xspole", "geos-180", "geos-90", "geos180", "geos140", "geos-140"]
+skips =  [  "axis-fortran" , "obsjson", "proj-regression-lambert_north_atlantic"]
+next_release = []
 tests=[]
 def add_test(script, directory, output, reference):
     tests.append((script, directory, output, reference))
