@@ -34,7 +34,7 @@ thresholds = {
 skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
 		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
 
-skips =  [  "axis-fortran" , "obsjson", "proj-regression-lambert_north_atlantic"]
+skips =  [  "axis-fortran" , "obsjson", "proj-regression-lambert_north_atlantic",  "xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7"]
 next_release = []
 tests=[]
 def add_test(script, directory, output, reference):
