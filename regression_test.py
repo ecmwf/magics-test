@@ -29,6 +29,7 @@ thresholds = {
     "coastlines2" : 2500,
    "epsgram_sample" : 11000,
    "xy_wind" : 4500, 
+   "plumes" : 3000, 
 }
 
 skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
