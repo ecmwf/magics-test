@@ -3,9 +3,24 @@
 
 This test suite runs the regression tests for the [Magics](https://confluence.ecmwf.int/magics) meteorological plotting package. 
 
+
 ## Running the test suite
 
-pytest --html report.html
+`pytest --html report.html`
+
+A report is created in report.html , showing the visual difference between a reference set of images.   
+An error is reported is the number of different pixels exceeds a certain threshold.
+
+![Example of report](report.png)
+
+## Creating your own reference dataset.
+
+A script can be used to generate the reference dataset for a specific Magics Version:  
+`python make-reference.py`   
+
+This will generate a png for each test in the *reference* directory.  
+You can after that run the test suite using your new magics version.  
+This will show you the visual differences bwteen the 2 versions.
 
 
 ## License
