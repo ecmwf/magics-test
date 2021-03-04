@@ -16,7 +16,7 @@ An error is reported is the number of different pixels exceeds a certain thresho
 ## Creating your own reference dataset.
 
 A script can be used to generate the reference dataset for a specific Magics Version:  
-`python make-reference.py`   
+`python make_reference.py`   
 
 This will generate a png for each test in the *reference* directory.  
 You can after that run the test suite using your new magics version.  
