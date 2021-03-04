@@ -5,11 +5,13 @@ This test suite runs the regression tests for the [Magics](https://confluence.ec
 
 
 ## Running the test suite
-
 `pytest --html report.html`
 
 A report is created in report.html , showing the visual difference between a reference set of images.   
 An error is reported is the number of different pixels exceeds a certain threshold.
+
+You may need to install pytest-html to get the extension.
+pip install pytest-html
 
 ![Example of report](report.png)
 
