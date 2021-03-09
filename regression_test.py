@@ -32,12 +32,11 @@ thresholds = {
    "plumes" : 3000, 
 }
 
-skips = [ "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
-	"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
+skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
+		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
 
-skips =  [ "contour6", "axis-fortran" , "obsjson", "proj-regression-lambert_north_atlantic",  "xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7"]
+skips =  [  "axis-fortran" , "obsjson", "proj-regression-lambert_north_atlantic",  "xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7"]
 next_release = []
-skips = []
 tests=[]
 def add_test(script, directory, output, reference):
     tests.append((script, directory, output, reference))
@@ -99,12 +98,6 @@ def test_python(test_name, directory, output, reference, record_property):
                 ref_name,
                 diff_name,
             ]
-
-            if os.path.exists("/usr/local/bin/magick") :
-                cmdline = ["/usr/local/bin/magick"] + cmdline
-            
-            print (cmdline)
-            
             p = subprocess.Popen(" ".join(cmdline), shell=True,
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE)
@@ -162,6 +155,7 @@ def generate_test_method(test_name, directory, output):
     def run_test(self):
         os.chdir(directory)
         
+        #record_property("gfhjgdhjs")
        
         # backup any existing files with our expected output_name
         output_name = "{}.png".format(test_name)
