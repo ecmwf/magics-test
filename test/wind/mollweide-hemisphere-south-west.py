@@ -12,32 +12,32 @@ from Magics.macro import *
 
 # Setting the coordinates of the geographical area
 south = {
-    'subpage_map_projection':'polar_stereographic',
-    'subpage_map_hemisphere':'south',
-    'subpage_lower_left_latitude':-3.,
-    'subpage_lower_left_longitude':60.,
-    'subpage_upper_right_latitude':-30.,
-    'subpage_upper_right_longitude':-100.,
-    }
+    "subpage_map_projection": "polar_stereographic",
+    "subpage_map_hemisphere": "south",
+    "subpage_lower_left_latitude": -3.0,
+    "subpage_lower_left_longitude": 60.0,
+    "subpage_upper_right_latitude": -30.0,
+    "subpage_upper_right_longitude": -100.0,
+}
 
 north = {
-    'subpage_map_projection':'polar_stereographic',
-    'subpage_map_hemisphere':'north',
-    }
+    "subpage_map_projection": "polar_stereographic",
+    "subpage_map_hemisphere": "north",
+}
 
 mollweide = {
-     'subpage_map_projection':'mollweide',
-     'subpage_map_hemisphere':'mollweide',
-        }
+    "subpage_map_projection": "mollweide",
+    "subpage_map_hemisphere": "mollweide",
+}
 polar_north = {
-     'subpage_map_projection':'polar_north',
-     'subpage_map_hemisphere':'polar_north',
-        }
+    "subpage_map_projection": "polar_north",
+    "subpage_map_hemisphere": "polar_north",
+}
 
 robinson = {
-     'subpage_map_projection':'robinson',
-     'subpage_map_hemisphere':'robinson',
-     }
+    "subpage_map_projection": "robinson",
+    "subpage_map_hemisphere": "robinson",
+}
 
 # Coastlines setting
 
@@ -45,35 +45,32 @@ robinson = {
 # Example reference
 
 for i in ["south-west"]:
-    for area in [ mollweide]:
-        ref = '%s-hemisphere-%s' % (area["subpage_map_hemisphere"], i)
+    for area in [mollweide]:
+        ref = "%s-hemisphere-%s" % (area["subpage_map_hemisphere"], i)
 
+        # Setting of the output file name
 
-# Setting of the output file name
+        png = output(
+            output_formats=["png"], output_name_first_page_number="off", output_name=ref
+        )
 
-        png = output(output_formats=['png'],
-                        output_name_first_page_number='off',
-                        output_name=ref)
+        coast = mcoast(
+            map_grid="on", map_grid_colour="tan", map_coastline_colour="tan",
+        )
 
-        coast = mcoast(map_grid='on', map_grid_colour='tan',
-                       map_coastline_colour='tan',
-                       )
+        # Import andthe  data
 
-# Import andthe  data
+        obs = mobs(obs_input_file_name="bufr-synop-%s-winds.bufr" % i)
 
+        title = mtext(
+            text_lines=[
+                "<font size='1'>Observation Plotting [Synop]: %s winds </font>" % i,
+                "",
+            ],
+            text_justification="left",
+            text_font_size=0.5,
+            text_colour="charcoal",
+        )
 
-        obs = mobs(obs_input_file_name='bufr-synop-%s-winds.bufr'%i)
-
-
-
-        title = \
-            mtext(text_lines=["<font size='1'>Observation Plotting [Synop]: %s winds </font>" % i
-                  , '',
-                  ], text_justification='left', text_font_size=0.5,
-                  text_colour='charcoal')
-
-
-
-# To the plot
-        plot( png,  mmap(area), obs, coast, title)
-
+        # To the plot
+        plot(png, mmap(area), obs, coast, title)

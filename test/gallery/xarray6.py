@@ -13,14 +13,15 @@ import numpy as np
 from Magics import macro as magics
 
 ref = "xarray6"
-ds = xr.open_dataset('psl_Amon_GFDL-ESM2M_rcp45_r1i1p1_208101-208512.nc')
+ds = xr.open_dataset("psl_Amon_GFDL-ESM2M_rcp45_r1i1p1_208101-208512.nc")
 time = cftime.DatetimeNoLeap(2085, 12, 16, 12, 0, 0, 0, 5, 350)
 
-png = magics.output(output_name_first_page_number = "off", output_name = ref)
+png = magics.output(output_name_first_page_number="off", output_name=ref)
 data = magics.mxarray(
-        xarray_dataset = ds,
-        xarray_variable_name = "psl",
-        xarray_dimension_settings = {"time": time})
-contour = magics.mcont(contour_automatic_setting = "ecmwf")
+    xarray_dataset=ds,
+    xarray_variable_name="psl",
+    xarray_dimension_settings={"time": time},
+)
+contour = magics.mcont(contour_automatic_setting="ecmwf")
 
 magics.plot(png, data, contour, magics.mcoast())
