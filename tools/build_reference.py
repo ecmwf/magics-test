@@ -8,7 +8,7 @@
 import os
 import glob
 import subprocess
-
+import sys
 
 refs=[]
 def add_test(script, directory, output, reference):
@@ -21,10 +21,10 @@ def run(test_name, directory, output, reference):
         # backup any existing files with our expected output_name
         output_name = "{}.png".format(test_name)
         ref_name = "{}/{}".format(reference,output_name)
-        
+
         # run the test
         try :
-            subprocess.check_call(["python3",  "{}.py".format(test_name)])
+            subprocess.check_call([sys.executable,  "{}.py".format(test_name)])
         except Exception as e:
             print (e)
 

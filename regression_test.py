@@ -14,7 +14,7 @@ import glob
 import unittest
 import subprocess
 import pytest
-
+import sys
 
 thresholds = {
     "contour2" : 2500,
@@ -28,11 +28,11 @@ thresholds = {
     "epsrose" : 5000,
     "coastlines2" : 2500,
    "epsgram_sample" : 11000,
-   "xy_wind" : 4500, 
-   "plumes" : 3000, 
+   "xy_wind" : 4500,
+   "plumes" : 3000,
 }
 
-skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic", 
+skips = [  "axis-fortran", "projection5", "proj-regression-lambert_north_atlantic",
 		"xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7", "obsjson"]
 
 skips =  [ "axis-fortran" , "obsjson", "proj-regression-lambert_north_atlantic",  "xarray1", "xarray2", "xarray3", "xarray4", "xarray5", "xarray6", "xarray7"]
@@ -50,7 +50,7 @@ def test_python(test_name, directory, output, reference, record_property):
         os.chdir(directory)
 
         if os.environ.get("REGRESSION_MODE") != "off" :
-            
+
             record_property("test_name", test_name)
             record_property("directory", directory)
             record_property("reference", reference)
@@ -58,31 +58,31 @@ def test_python(test_name, directory, output, reference, record_property):
             diff_name = "{}/{}_diff.png".format(reference,test_name)
             record_property("diff-image", diff_name)
             record_property("new-test", True)
-            
+
         if test_name in skips:
            pytest.xfail("Test testing a new feature : expected to fail")
            assert False
-        
-       
+
+
         # backup any existing files with our expected output_name
         output_name = "{}.png".format(test_name)
         backup_name = output_name + ".backup"
         ref_name = "{}/{}".format(reference,output_name)
-        
-        
+
+
         # run the test
         try :
-            subprocess.check_call(["python3",  "{}.py".format(test_name)])
+            subprocess.check_call([sys.executable,  "{}.py".format(test_name)])
         except Exception as e:
-            
+
             assert False
 
-        
-        
+
+
 
         output_exists = os.path.isfile(output_name)
         assert output_exists == True
-        
+
         if os.environ.get("REGRESSION_MODE") == "off" :
             return
 
@@ -107,18 +107,18 @@ def test_python(test_name, directory, output, reference, record_property):
             record_property("ref-image",ref_name)
             record_property("new-test", False)
             os.rename(output_name, os.path.join(output, output_name))
-           
+
             if test_name in next_release:
                 pytest.xfail("Test testing a new feature : expected to fail")
             assert diff < thresholds.get(test_name, 2000)
-            
-       
-            
-        
 
-        
 
-        
+
+
+
+
+
+
 def cleanup_backup(backup_name, original_name):
     """
     Move a backed-up file back to its original name.
@@ -138,7 +138,7 @@ def move_output(output_name, directory):
     os.rename(output_name, os.path.join(directory, output_name))
 
 
-    
+
 
 def generate_test_method(test_name, directory, output):
     """
@@ -149,24 +149,24 @@ def generate_test_method(test_name, directory, output):
     """
     directory=directory
     output=output
-    
-    
+
+
 
     def run_test(self):
         os.chdir(directory)
-        
+
         #record_property("gfhjgdhjs")
-       
+
         # backup any existing files with our expected output_name
         output_name = "{}.png".format(test_name)
         backup_name = output_name + ".backup"
         if os.path.isfile(output_name):
             os.rename(output_name, backup_name)
             self.addCleanup(cleanup_backup, backup_name, output_name)
-        
+
         print("Adding test: {}".format(method_name))
         # run the test
-        ret = subprocess.call("python {}.py".format(test_name), shell=True)
+        ret = subprocess.call("{} {}.py".format(sys.executable, test_name), shell=True)
         self.assertEqual(ret, 0)
 
         output_exists = os.path.isfile(output_name)

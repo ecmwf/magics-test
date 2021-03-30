@@ -12,7 +12,7 @@ directory.
 import os
 import glob
 import subprocess
-
+import sys
 
 def test_python(test_name, directory, output, reference):
     os.chdir(directory)
@@ -21,7 +21,7 @@ def test_python(test_name, directory, output, reference):
 
     # run the test
     try:
-        subprocess.check_call(["python3", "{}.py".format(test_name)])
+        subprocess.check_call([sys.executable, "{}.py".format(test_name)])
     except Exception as e:
         print(e)
         assert False
