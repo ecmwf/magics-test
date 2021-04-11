@@ -20,7 +20,7 @@ def pytest_runtest_makereport(item, call):
 
         if properties.get("new-test", True):
             extra.append(pytest_html.extras.html("<table>"))
-            extra.append(pytest_html.extras.html("<tr><th colspan='2'> Directory : {}   Python script : {}.py </th></tr>".format(properties["directory"], properties["test_name"])))
+            extra.append(pytest_html.extras.html("<tr><th colspan='2'> Directory : {}   Python script : {}.py   </th></tr>".format(properties["directory"], properties["test_name"])))
             extra.append(
                 pytest_html.extras.html(
                     "<tr><th colspan='2'>new test : {} </th></tr>".format(
@@ -41,13 +41,13 @@ def pytest_runtest_makereport(item, call):
             diff = "file://{}".format(properties["diff-image"])
             ref = "file://{}".format(properties["ref-image"])
             extra.append(pytest_html.extras.html("<table>"))
-            extra.append(pytest_html.extras.html("<tr><th colspan='4'> Directory : {}   Python script : {}.py </th></tr>".format(properties["directory"], properties["test_name"])))
+            extra.append(pytest_html.extras.html("<tr><th colspan='4'> Directory : {}   Python script : {}.py [ ./update_ref.ksh -p {} -t {}]</th></tr>".format(properties["directory"], properties["test_name"],
+                    properties["directory"], properties["test_name"])))
             extra.append(
                 pytest_html.extras.html(
                     "<tr><th colspan='2'>Difference in pixels : {} Test : {} </th></tr>".format(
-                        properties.get("diff", "undef"), properties["test_name"]
+                        properties.get("diff", "undef"), properties["test_name"], properties["test_name"])
                     )
-                )
             )
             extra.append(pytest_html.extras.html("<tr>"))
             extra.append(
