@@ -32,7 +32,8 @@ thresholds = {
    "plumes" : 3000,
 }
 
-skips =  [ "proj-regression-lambert_north_atlantiic", "obsjson", "wind5", "wind6", "wind7"]
+skips =  [ "proj-regression-lambert_north_atlantic", "obsjson", "wind5", "wind6", "wind7", 
+         "xarray1.py",  "xarray2.py",  "xarray3.py",  "xarray4.py",  "xarray5.py",  "xarray6.py",  "xarray7.py"]
 next_release = []
 tests=[]
 def add_test(script, directory, output, reference):
