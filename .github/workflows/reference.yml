@@ -1,0 +1,157 @@
+name: reference
+
+# Controls when the workflow will run
+on:
+
+  # Allow workflow to be dispatched on demand
+  workflow_dispatch: ~
+
+jobs:
+  reference:
+    name: reference
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+        - ubuntu-20.04
+        - ubuntu-18.04
+        - macos-10.15
+        include:
+        - name: ubuntu-20.04
+          os: ubuntu-20.04
+          compiler: gnu-10
+          compiler_cc: gcc-10
+          compiler_cxx: g++-10
+          compiler_fc: gfortran-10
+        - name: ubuntu-18.04
+          os: ubuntu-18.04
+          compiler: gnu-10
+          compiler_cc: gcc-10
+          compiler_cxx: g++-10
+          compiler_fc: gfortran-10
+        # Xcode compiler requires empty environment variables, so we pass null (~) here
+        - name: macos-10.15
+          os: macos-10.15
+          compiler: clang-12
+          compiler_cc: ~
+          compiler_cxx: ~
+          compiler_fc: gfortran-10
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Workflow Trigger
+      run: |
+        echo '::group::Event Information'
+        echo '==> event_name: ${{ github.event_name }}'
+        echo '==> ref: ${{ github.ref }}'
+        echo '==> sha: ${{ github.sha }}'
+        echo '==> event.action: ${{ github.event.action }}'
+        echo '==> event.branch: ${{ github.event.branch }}'
+        echo '==> event.client_payload: ${{ toJSON(github.event.client_payload) }}'
+        echo '::endgroup::'
+
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Checkout magics-python Repository
+      uses: actions/checkout@v2
+      with:
+        repository: ecmwf/magics-python
+        path: ./magics-python
+
+    - name: Install System Dependencies (Ubuntu)
+      shell: bash -eux {0}
+      if: startsWith(matrix.os, 'ubuntu')
+      run: |
+        sudo apt-get -q -y update
+        [[ "${{ matrix.os }}" == "ubuntu-18.04" ]] && NETCDF_PACKAGE=13 || NETCDF_PACKAGE=15
+        sudo apt-get -q -y install libnetcdf$NETCDF_PACKAGE libnetcdf-dev libpango1.0-dev libcurl4-openssl-dev
+
+    - name: Install System Dependencies (macOS)
+      shell: bash -eux {0}
+      if: startsWith(matrix.os, 'macos')
+      run: brew install netcdf imagemagick pango
+
+    - name: Install Dependencies
+      id: install-dependencies
+      uses: ecmwf-actions/build-package@v2
+      with:
+        self_build: false
+        dependencies: |
+          ecmwf/ecbuild
+          ecmwf/eccodes
+          OSGeo/PROJ@refs/tags/8.1.1
+          ecmwf/magics@master
+        dependency_branch: develop
+
+    - name: Configure Fonts
+      shell: bash -eux {0}
+      run: |
+        FONTS_DIR=${{ runner.temp }}/fonts
+        FC_DIR=$HOME/.config/fontconfig
+        FC_CONF=$FC_DIR/fonts.conf
+        mkdir -p $FONTS_DIR && cd $FONTS_DIR
+        wget -q -O freefont.zip http://ftp.gnu.org/gnu/freefont/freefont-otf-20100919.zip
+        unzip freefont.zip && rm freefont.zip
+        mkdir -p $FC_DIR
+        cat << EOF > $FC_CONF
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+            <dir>$FONTS_DIR</dir>
+            <match>
+                <test name="family">
+                    <string>sans-serif</string>
+                </test>
+                <edit name="family" mode="assign" binding="strong">
+                    <string>FreeSans</string>
+                </edit>
+            </match>
+            <match>
+                <test name="family">
+                    <string>helvetica</string>
+                </test>
+                <edit name="family" mode="assign" binding="strong">
+                    <string>FreeSans</string>
+                </edit>
+            </match>
+            <match>
+                <test name="family">
+                    <string>times</string>
+                </test>
+                <edit name="family" mode="assign" binding="strong">
+                    <string>FreeSerif</string>
+                </edit>
+            </match>
+        </fontconfig>
+        EOF
+        fc-cache && fc-match sansserif && fc-match helvetica && fc-match times
+
+    - name: Setup Environment
+      shell: bash -eux {0}
+      run: |
+        echo "MAGPLUS_HOME=${{ runner.temp }}/install/magics" >> $GITHUB_ENV  # Magics path
+        echo "MAGPLUS_REGRESSION=ON" >> $GITHUB_ENV  # Remove PageID text
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Python Dependencies
+      shell: bash -eux {0}
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install cftime netcdf4 pytest pytest-html xarray
+        python -m pip install ./magics-python
+        python -m Magics selfcheck
+        rm -rf ./magics-python  # cleanup
+
+    - name: Update Reference Images
+      shell: bash -eux {0}
+      run: python make_reference.py
+
+    - name: Upload Reference Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: magics-test-reference-${{ matrix.os }}
+        path: reference
