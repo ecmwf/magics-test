@@ -214,3 +214,15 @@ jobs:
       with:
         name: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-${{ env.MAGICS_SHA }}
         path: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-${{ env.MAGICS_SHA }}.tar
+
+  notify:
+    name: notify
+    runs-on: ubuntu-20.04
+    needs: ci
+    if: always() && github.ref == 'refs/heads/master'
+    steps:
+    - name: Notify Teams
+      uses: ecmwf-actions/notify-teams@v1
+      with:
+        incoming_webhook: ${{ secrets.MS_TEAMS_INCOMING_WEBHOOK }}
+        needs_context: ${{ toJSON(needs) }}
