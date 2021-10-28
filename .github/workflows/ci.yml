@@ -20,6 +20,7 @@ on:
   repository_dispatch:
     types:
     - magics-updated
+    - magics-python-updated
 
 jobs:
   ci:
@@ -77,6 +78,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       MAGICS_BRANCH: master
+      MAGICS_PYTHON_BRANCH: master
     steps:
     - name: Workflow Trigger
       run: |
@@ -96,6 +98,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ecmwf/magics-python
+        ref: ${{ github.event.client_payload.magics_python_ref || env.MAGICS_PYTHON_BRANCH }}
         path: ./magics-python
 
     - name: Install System Dependencies (Ubuntu)
@@ -170,8 +173,11 @@ jobs:
       shell: bash -eux {0}
       run: |
         MAGICS_HEAD=$( curl -u ${{ secrets.GH_USER }}:${{ secrets.GH_PAT }} https://api.github.com/repos/ecmwf/magics/git/ref/heads/${{ env.MAGICS_BRANCH }} | jq .object.sha | tr -d '"' )
-        PAYLOAD_SHA=${{ github.event.client_payload.magics_sha }}
-        echo "MAGICS_SHA=${PAYLOAD_SHA:-$MAGICS_HEAD}" >> $GITHUB_ENV
+        MAGICS_PYTHON_HEAD=$( curl -u ${{ secrets.GH_USER }}:${{ secrets.GH_PAT }} https://api.github.com/repos/ecmwf/magics-python/git/ref/heads/${{ env.MAGICS_PYTHON_BRANCH }} | jq .object.sha | tr -d '"' )
+        MAGICS_PAYLOAD_SHA=${{ github.event.client_payload.magics_sha }}
+        MAGICS_PYTHON_PAYLOAD_SHA=${{ github.event.client_payload.magics_python_sha }}
+        echo "MAGICS_SHA=${MAGICS_PAYLOAD_SHA:-$MAGICS_HEAD}" >> $GITHUB_ENV
+        echo "MAGICS_PYTHON_SHA=${MAGICS_PYTHON_PAYLOAD_SHA:-$MAGICS_PYTHON_HEAD}" >> $GITHUB_ENV
         echo "MAGPLUS_HOME=${{ runner.temp }}/install/magics" >> $GITHUB_ENV  # Magics path
         echo "MAGPLUS_REGRESSION=ON" >> $GITHUB_ENV  # Remove PageID text
 
@@ -206,14 +212,14 @@ jobs:
       shell: bash -eux {0}
       run: |
         [[ "${{ matrix.os }}" == "macos-10.15" ]] && sed -i '' 's#file://${{ github.workspace }}/##' report.html || sed -i 's#file://${{ github.workspace }}/##' report.html
-        tar -cvf magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-${{ env.MAGICS_SHA }}.tar assets reference report.html results
+        tar -cvf magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-magics-${{ env.MAGICS_SHA }}-magics-python-${{ env.MAGICS_PYTHON_SHA }}.tar assets reference report.html results
 
     - name: Upload Test Report Artifact
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-${{ env.MAGICS_SHA }}
-        path: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-${{ env.MAGICS_SHA }}.tar
+        name: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-magics-${{ env.MAGICS_SHA }}-magics-python-${{ env.MAGICS_PYTHON_SHA }}
+        path: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-magics-${{ env.MAGICS_SHA }}-magics-python-${{ env.MAGICS_PYTHON_SHA }}.tar
 
   notify:
     name: notify
