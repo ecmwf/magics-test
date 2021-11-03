@@ -32,7 +32,7 @@ thresholds = {
    "plumes" : 3000,
 }
 
-skips =  [ "proj-regression-lambert_north_atlantic", "obsjson", "wind5", "wind6", "wind7", 
+skips =  [ "proj-regression-lambert_north_atlantic", "obsjson", "wind5", "wind6", "wind7", "contour6",
          "xarray1",  "xarray2",  "xarray3",  "xarray4",  "xarray5",  "xarray6",  "xarray7"]
 next_release = []
 tests=[]
