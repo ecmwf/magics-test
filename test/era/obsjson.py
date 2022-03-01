@@ -42,39 +42,30 @@ coast = mcoast(
 
 obs = mobs(
     obsjson_info_list=[
-        {
-            "type": "ersagun",
-            "identifier": "era1",
-            "temperature": -3.0,
-            "pressure_after": 1008.0,
-            "pressure_before": 1008.0,
-            "pressure": 1010.0,
-            "longitude": 0.3,
-            "latitude": 49.5,
-            "temperature_before": -2.0,
-        },
-        {
-            "type": "ersagun",
-            "identifier": "era2",
-            "temperature": -5.0,
-            "pressure_after": 1038.0,
-            "pressure_before": 999.0,
-            "pressure": 1010.0,
-            "longitude": 5.39,
-            "latitude": 55.0,
-            "temperature_before": -2.0,
-        },
+       {"type": "guan_plot", 
+	"identifier": "toto", 
+	"freq00": 4., 
+	"gross00": 6., 
+	"freq06": 6., 
+	"gross06":0., 
+	"freq12": 12., 
+	"gross12": 12., 
+	"freq18": 18., 
+	"gross18": 18., 
+	"longitude": 20, 
+	"latitude": 50}
     ],
     obs_template_file_name="obs.template",
-    obs_size=0.3,
+    obs_size=0.6,
     obs_ring_size=0.2,
     obs_distance_apart=0.0,
+    obs_font_size=0.6,
 )
 
 title = mtext(
     text_lines=["Observation plotting ..."],
     text_justification="left",
-    text_font_size=0.8,
+    text_font_size=1.5,
     text_colour="charcoal",
 )
 
