@@ -30,6 +30,7 @@ thresholds = {
    "epsgram_sample" : 11000,
    "xy_wind" : 4500,
    "plumes" : 3000,
+   "wind4" : 3300,
 }
 
 skips =  [ "obsjson", "contour6", "tamir", "wind7", "wind6", "axis3",
