@@ -216,7 +216,7 @@ jobs:
 
     - name: Upload Test Report Artifact
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-magics-${{ env.MAGICS_SHA }}-magics-python-${{ env.MAGICS_PYTHON_SHA }}
         path: magics-test-report-${{ matrix.os }}-${{ matrix.compiler }}-magics-${{ env.MAGICS_SHA }}-magics-python-${{ env.MAGICS_PYTHON_SHA }}.tar
