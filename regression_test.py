@@ -89,8 +89,10 @@ def test_python(test_name, directory, output, reference, record_property):
 
         if ref_exists:
 
+            compare_exe = os.environ.get('COMPARE_EXE', "compare")
+
             cmdline = [
-                "compare",
+                compare_exe,
                 "-metric AE",
                 "-dissimilarity-threshold 1",
                 os.path.join(directory, output_name),
